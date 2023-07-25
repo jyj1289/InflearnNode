@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require('body-parser')
 const { User } = require('./models/User');
+const mongoose = require('mongoose');
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
@@ -10,8 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 // application/json
 app.use(bodyParser.json());
 
-const mongoose = require('mongoose');
-mongoose.connect('mmongodb+srv://jyj1289:abcd1234@board.abbggdo.mongodb.net/', {
+mongoose.connect('mongodb+srv://jyj1289:abcd1234@board.abbggdo.mongodb.net/', {
     useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false
 }).then(() => console.log('MongoDB Connected...'))
 .catch(err => console.log(err));
