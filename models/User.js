@@ -68,7 +68,7 @@ userSchema.methods.generateToken = function (cb) {
     let token = jwt.sign(user._id.toHexString(), 'secretToken')
     // user._id + 'secretToken' = token 
     // -> 
-    // 'secretToken' -> user._id
+    // 'secretToken' ->  user._id
 
     user.token = token
     user.save(function (err, user) {
@@ -80,3 +80,4 @@ userSchema.methods.generateToken = function (cb) {
 const User = mongoose.model("User", userSchema);
 
 module.exports = { User };
+
