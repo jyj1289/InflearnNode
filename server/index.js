@@ -3,9 +3,9 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const { User } = require("./models/User");
+const { User } = require("./server/models/User");
 const mongoose = require("mongoose");
-const auth = require("./middleware/auth");
+const auth = require("./server/middleware/auth");
 
 // application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
