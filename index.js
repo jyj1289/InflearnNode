@@ -68,7 +68,7 @@ app.post("/api/users/login", (req, res) => {
             //비밀번호 까지 맞다면 토큰을 생성하기.
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
-
+                console.log(user.token);
                 // 토큰을 저장한다.  어디에 ?  쿠키 , 로컳스토리지
                 res.cookie("x_auth", user.token)
                     .status(200)
@@ -78,6 +78,9 @@ app.post("/api/users/login", (req, res) => {
     });
 });
 
+// 먼저 미들웨어 함수를 적용하고, 그 이후에 라우트 핸들러를 정의합니다.
+
+// auth 미들웨어 적용
 app.get("/api/users/auth", auth, (req, res) => {
     // 여기 까지 미들웨어를 통과했다는 얘기는 Authentication이 true라는 의미
     res.status(200).json({
@@ -85,14 +88,14 @@ app.get("/api/users/auth", auth, (req, res) => {
         isAdmin: req.user.role === 0 ? false : true,
         isAuth: true,
         email: req.user.email,
-        name: req.user.name, // 오타 수정: req.user.name으로 변경
+        name: req.user.name,
         lastname: req.user.lastname,
         role: req.user.role,
         imgae: req.user.imgae,
     });
 });
 
-
+// logout 라우트 핸들러 정의
 app.get("/api/users/logout", auth, (req, res) => {
     User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
         if (err) return res.json({ success: false, err: err });
