@@ -1,4 +1,6 @@
+// 현재 경로 기준으로 User 모듈의 경로를 설정합니다.
 const { User } = require("../models/User");
+
 
 let auth = (req, res, next) => {
     // 인증 처리를 하는곳
